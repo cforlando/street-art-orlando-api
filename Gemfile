@@ -40,6 +40,8 @@ gem 'carrierwave', '~> 1.0'
 gem 'carrierwave-base64'
 gem 'fog-aws'
 gem 'kaminari'
+gem 'mini_magick'
+gem 'active_model_serializers'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

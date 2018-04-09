@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403031043) do
+ActiveRecord::Schema.define(version: 20180409003619) do
 
   create_table "submissions", force: :cascade do |t|
     t.string "title"
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(version: 20180403031043) do
     t.datetime "updated_at", null: false
     t.decimal "latitude", precision: 10, scale: 6
     t.decimal "longitude", precision: 10, scale: 6
+    t.string "artist"
+    t.string "ip_address"
+    t.string "app_version"
+    t.string "device_model"
+    t.string "system_version"
+    t.string "device_locale"
+    t.text "location_note"
     t.index ["status"], name: "index_submissions_on_status"
     t.index ["user_id"], name: "index_submissions_on_user_id"
   end

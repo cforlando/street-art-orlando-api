@@ -9,6 +9,7 @@ class Api::SubmissionsController < Api::BaseController
     per_page = params[:per_page] || DEFAULT_PER_PAGE
 
     submissions = Submission.all.order(created_at: :desc).page(page).per(per_page)
+    
     meta = {
       current_page: submissions.current_page,
       next_page: submissions.next_page,
@@ -24,8 +25,10 @@ class Api::SubmissionsController < Api::BaseController
         photo_url: s.photo_url,
         thumb_url: s.thumb_url,
         tiny_url: s.tiny_url,
-        latitude: s.latitude.present? ? s.latitude.to_f : nil,
-        longitude: s.longitude.present? ? s.longitude.to_f : nil,
+        latitude: s.latitude.to_f,
+        longitude: s.longitude.to_f,
+        artist: s.artist,
+        location_note: s.location_note,
         created_at: s.created_at,
         updated_at: s.updated_at
       }
@@ -36,14 +39,21 @@ class Api::SubmissionsController < Api::BaseController
 
   # POST /submissions
   def create
+    if params[:photo].blank?
+      render json: { error: 'missing photo' }, status: :unprocessable_entity
+      return
+    end
+
     submission = Submission.new
     submission.title = params[:title]
-    submission.photo = params[:photo]
+    submission.artist = params[:artist]
+    submission.location_note = params[:location_note]
     submission.latitude = params[:latitude]
     submission.longitude = params[:longitude]
     submission.user = current_user
 
     if submission.save
+      SubmissionWorker.perform_async(submission.id, params[:photo])
       render json: submission, status: :created
     else
       render json: submission.errors, status: :unprocessable_entity

@@ -70,7 +70,7 @@ GEM
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
     cookiejar (0.3.3)
-    crass (1.0.3)
+    crass (1.0.4)
     daemons (1.2.6)
     em-http-request (1.1.5)
       addressable (>= 2.3.4)

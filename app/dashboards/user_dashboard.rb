@@ -15,6 +15,7 @@ class UserDashboard < Administrate::BaseDashboard
     password: Field::String,
     password_confirmation: Field::String,
     anonymous: Field::Boolean,
+    preferred: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -36,6 +37,7 @@ class UserDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :email,
+    :preferred,
     :anonymous,
     :created_at,
     :updated_at,
@@ -49,6 +51,7 @@ class UserDashboard < Administrate::BaseDashboard
     :email,
     :password,
     :password_confirmation,
+    :preferred,
     :anonymous
   ].freeze
 

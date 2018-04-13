@@ -33,7 +33,15 @@ ActiveRecord::Schema.define(version: 20180413002521) do
     t.index ["user_id"], name: "index_submissions_on_user_id"
   end
 
-# Could not dump table "users" because of following StandardError
-#   Unknown type 'bool' for column 'preferred'
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+    t.boolean "anonymous", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "preferred", default: false
+    t.index ["email"], name: "index_users_on_email"
+  end
 
 end

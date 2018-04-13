@@ -13,7 +13,7 @@ class SubmissionDashboard < Administrate::BaseDashboard
     title: Field::String,
     description: Field::Text,
     photo: PhotoField,
-    status: Field::Select.with_options(collection: ['pending', 'approved', 'rejected'], searchable: true),
+    status: Field::Select.with_options(collection: ['pending', 'approved', 'rejected']),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     latitude: Field::String.with_options(searchable: false),
@@ -35,7 +35,7 @@ class SubmissionDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :id,
-    :title,
+    :photo,
     :status,
     :user
   ].freeze
@@ -45,20 +45,16 @@ class SubmissionDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :user,
     :id,
+    :status,
+    :photo,
+    :coordinate,
+    :location_note,
+    :artist,
     :title,
     :description,
-    :photo,
-    :status,
     :created_at,
     :updated_at,
-    :coordinate,
-    :artist,
-    :ip_address,
-    :app_version,
-    :device_model,
-    :system_version,
-    :device_locale,
-    :location_note,
+    :ip_address
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -66,13 +62,13 @@ class SubmissionDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :user,
-    :title,
-    :description,
     :status,
     :latitude,
     :longitude,
+    :location_note,
     :artist,
-    :location_note
+    :title,
+    :description,
   ].freeze
 
   # Overwrite this method to customize how submissions are displayed

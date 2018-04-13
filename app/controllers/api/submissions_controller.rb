@@ -9,7 +9,7 @@ class Api::SubmissionsController < Api::BaseController
     page = params[:page] || DEFAULT_PAGE
     per_page = params[:per_page] || DEFAULT_PER_PAGE
 
-    submissions = Submission.all.order(created_at: :desc).page(page).per(per_page)
+    submissions = Submission.approved(created_at: :desc).page(page).per(per_page)
     
     meta = {
       current_page: submissions.current_page,

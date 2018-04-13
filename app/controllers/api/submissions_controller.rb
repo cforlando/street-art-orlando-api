@@ -1,4 +1,5 @@
 class Api::SubmissionsController < Api::BaseController
+  APPROVED = 'approved'
 
   DEFAULT_PAGE = 1
   DEFAULT_PER_PAGE = 10
@@ -50,6 +51,7 @@ class Api::SubmissionsController < Api::BaseController
     submission.location_note = params[:location_note]
     submission.latitude = params[:latitude]
     submission.longitude = params[:longitude]
+    submission.status = APPROVED if current_user.preferred?
     submission.user = current_user
 
     if submission.save

@@ -10,6 +10,10 @@ class Submission < ApplicationRecord
   scope :approved, -> { where(status: 'approved').order(created_at: :desc) }
   scope :rejected, -> { where(status: 'rejected').order(created_at: :desc) }
 
+  def coordinate
+    [latitude, longitude]
+  end
+
   def photo_url
     photo.url
   end

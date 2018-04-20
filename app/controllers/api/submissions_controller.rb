@@ -9,38 +9,14 @@ class Api::SubmissionsController < Api::BaseController
     page = params[:page] || DEFAULT_PAGE
     per_page = params[:per_page] || DEFAULT_PER_PAGE
 
-    submissions = Submission.approved.page(page).per(per_page)
-    
-    meta = {
-      current_page: submissions.current_page,
-      next_page: submissions.next_page,
-      total: submissions.total_count,
-      total_pages: submissions.total_pages
-    }
-
-    submissions_array = submissions.map do |s|
-      {
-        id: s.id,
-        title: s.title,
-        description: s.description,
-        photo_url: s.photo_url,
-        thumb_url: s.thumb_url,
-        tiny_url: s.tiny_url,
-        latitude: s.latitude.to_f,
-        longitude: s.longitude.to_f,
-        artist: s.artist,
-        location_note: s.location_note,
-        favorite: current_user.favorite?(s),
-        created_at: s.created_at,
-        updated_at: s.updated_at
-      }
-    end
-
-    render json: { submissions: submissions_array, meta: meta }
+    @user = current_user
+    @submissions = Submission.approved.page(page).per(per_page)
   end
 
   # POST /submissions
   def create
+    puts "#{params}"
+
     if params[:photo].blank?
       render json: { error: 'missing photo' }, status: :unprocessable_entity
       return
@@ -57,7 +33,7 @@ class Api::SubmissionsController < Api::BaseController
 
     if submission.save
       SubmissionWorker.perform_async(submission.id, params[:photo])
-      render json: submission, status: :created
+      render nothing: true, status: :created
     else
       render json: submission.errors, status: :unprocessable_entity
     end
@@ -68,33 +44,7 @@ class Api::SubmissionsController < Api::BaseController
     page = params[:page] || DEFAULT_PAGE
     per_page = params[:per_page] || DEFAULT_PER_PAGE
 
-    submissions = current_user.favorite_submissions.order(created_at: :desc).page(page).per(per_page)
-    
-    meta = {
-      current_page: submissions.current_page,
-      next_page: submissions.next_page,
-      total: submissions.total_count,
-      total_pages: submissions.total_pages
-    }
-
-    submissions_array = submissions.map do |s|
-      {
-        id: s.id,
-        title: s.title,
-        description: s.description,
-        photo_url: s.photo_url,
-        thumb_url: s.thumb_url,
-        tiny_url: s.tiny_url,
-        latitude: s.latitude.to_f,
-        longitude: s.longitude.to_f,
-        artist: s.artist,
-        location_note: s.location_note,
-        created_at: s.created_at,
-        updated_at: s.updated_at
-      }
-    end
-
-    render json: { submissions: submissions_array, meta: meta }
+    @submissions = current_user.favorite_submissions.order(created_at: :desc).page(page).per(per_page)
   end
 
   # POST /submissions/:id/favorite

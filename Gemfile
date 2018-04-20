@@ -39,7 +39,6 @@ gem 'carrierwave-base64'
 gem 'fog-aws'
 gem 'kaminari'
 gem 'mini_magick'
-gem 'active_model_serializers'
 gem 'sidekiq'
 gem 'administrate'
 

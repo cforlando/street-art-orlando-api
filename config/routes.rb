@@ -8,7 +8,15 @@ Rails.application.routes.draw do
     root to: "submissions#index"
   end
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  namespace :api do
+    resources :submissions, only: [:index, :create]
+    get 'submissions/favorites', to: 'submissions#favorites'
+    post 'submissions/:id/favorite', to: 'submissions#favorite'
+    delete 'submissions/:id/unfavorite', to: 'submissions#unfavorite'
+
+    post 'authenticate', to: 'authentication#authenticate'
+    post 'register', to: 'users#register'
+  end
 
   Sidekiq::Web.use Rack::Auth::Basic do |username, password|
     # Protect against timing attacks:
@@ -19,12 +27,5 @@ Rails.application.routes.draw do
     ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(username), ::Digest::SHA256.hexdigest(ENV['ADMIN_USER'])) & ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(password), ::Digest::SHA256.hexdigest(ENV['ADMIN_PASSWORD']))
   end if Rails.env.production?
   mount Sidekiq::Web => '/workers'
-
-  namespace :api do
-    resources :submissions, only: [:index, :create]
-
-    post 'authenticate', to: 'authentication#authenticate'
-    post 'register', to: 'users#register'
-  end
 
 end

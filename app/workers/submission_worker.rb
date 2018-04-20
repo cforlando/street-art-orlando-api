@@ -4,6 +4,7 @@ class SubmissionWorker
   def perform(submission_id, photo_str)
     submission = Submission.find(submission_id)
     submission.photo = photo_str
+    submission.status = submission.user.preferred? ? 'approved' : 'pending'
     submission.save!
   end
 

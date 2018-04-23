@@ -15,8 +15,6 @@ class Api::SubmissionsController < Api::BaseController
 
   # POST /submissions
   def create
-    puts "#{params}"
-
     if params[:photo].blank?
       render json: { error: 'missing photo' }, status: :unprocessable_entity
       return
@@ -41,10 +39,7 @@ class Api::SubmissionsController < Api::BaseController
 
   # GET submissions/favorites
   def favorites
-    page = params[:page] || DEFAULT_PAGE
-    per_page = params[:per_page] || DEFAULT_PER_PAGE
-
-    @submissions = current_user.favorite_submissions.order(created_at: :desc).page(page).per(per_page)
+    @submissions = current_user.favorite_submissions.order(created_at: :desc)
   end
 
   # POST /submissions/:id/favorite

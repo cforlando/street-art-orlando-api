@@ -1,7 +1,6 @@
 class Api::BaseController < ActionController::API
   include ActionController::ImplicitRender
   before_action :authenticate_request
-  respond_to? :json  
 
   attr_reader :current_user
   
@@ -9,7 +8,7 @@ class Api::BaseController < ActionController::API
   
   def authenticate_request
     @current_user = AuthorizeApiRequest.call(request.headers).result
-    render nothing: true, status: 401 unless @current_user
+    render json: { error: 'unauthorized user' }, status: 401 unless @current_user
   end
 
 end

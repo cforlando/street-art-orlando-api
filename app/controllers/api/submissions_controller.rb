@@ -1,4 +1,6 @@
 class Api::SubmissionsController < Api::BaseController
+  skip_before_action :authenticate_request, only: [:index]
+
   PROCESSING = 'processing'
 
   DEFAULT_PAGE = 1
@@ -31,15 +33,22 @@ class Api::SubmissionsController < Api::BaseController
 
     if submission.save
       SubmissionWorker.perform_async(submission.id, params[:photo])
-      render nothing: true, status: :created
+      render json: { success: true }, status: :accepted
     else
       render json: submission.errors, status: :unprocessable_entity
     end
   end
 
+  # GET submissions/mine
+  def mine
+    @submissions = current_user.submissions.order(created_at: :desc)
+    render 'submissions/index'
+  end
+
   # GET submissions/favorites
   def favorites
     @submissions = current_user.favorite_submissions.order(created_at: :desc)
+    render 'submissions/index'
   end
 
   # POST /submissions/:id/favorite

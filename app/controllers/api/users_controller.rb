@@ -9,8 +9,7 @@ class Api::UsersController < Api::BaseController
     user.anonymous = params[:anonymous] == '1'
 
     if user.save
-      command = AuthenticateUser.call(params[:email], params[:password])
-      render json: { auth_token: command.result }
+      render json: { success: true }, status: :created
     else
       render json: user.errors, status: :unprocessable_entity
     end

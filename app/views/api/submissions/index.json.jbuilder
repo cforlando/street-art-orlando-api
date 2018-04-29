@@ -2,6 +2,7 @@ json.submissions @submissions do |submission|
   json.(
     submission,
     :id,
+    :status,
     :title,
     :description,
     :photo_url,
@@ -11,7 +12,8 @@ json.submissions @submissions do |submission|
     :location_note,
     :created_at
   )
-  json.favorite @user.favorite?(submission)
+
+  json.favorite @user.present? ? @user.favorite?(submission) : false
   json.latitude submission.latitude.to_f
   json.longitude submission.longitude.to_f
 end
@@ -21,4 +23,4 @@ json.meta do
   json.next_page @submissions.next_page
   json.total @submissions.total_count
   json.total_pages @submissions.total_pages
-end
+end if @submissions.total_pages.present?

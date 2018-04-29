@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :submissions, only: [:index, :create]
+    get 'submissions/mine', to: 'submissions#mine'
     get 'submissions/favorites', to: 'submissions#favorites'
     post 'submissions/:id/favorite', to: 'submissions#favorite'
     delete 'submissions/:id/unfavorite', to: 'submissions#unfavorite'

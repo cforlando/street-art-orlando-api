@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   has_secure_password validations: false
 
-  has_many :devices, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :submissions, dependent: :restrict_with_error
   has_many :favorite_submissions, -> { order('favorites.created_at DESC')}, through: :favorites, source: :submission

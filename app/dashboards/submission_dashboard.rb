@@ -46,12 +46,12 @@ class SubmissionDashboard < Administrate::BaseDashboard
     :user,
     :id,
     :status,
+    :title,
+    :artist,
+    :description,
     :photo,
     :coordinate,
     :location_note,
-    :artist,
-    :title,
-    :description,
     :created_at,
     :updated_at,
     :ip_address
@@ -63,12 +63,12 @@ class SubmissionDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :user,
     :status,
+    :title,
+    :artist,
+    :description,
     :latitude,
     :longitude,
-    :location_note,
-    :artist,
-    :title,
-    :description,
+    :location_note
   ].freeze
 
   # Overwrite this method to customize how submissions are displayed

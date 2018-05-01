@@ -42,13 +42,13 @@ class Api::SubmissionsController < Api::BaseController
   # GET submissions/mine
   def mine
     @submissions = current_user.submissions.order(created_at: :desc)
-    render 'submissions/index'
+    render 'index.json'
   end
 
   # GET submissions/favorites
   def favorites
     @submissions = current_user.favorite_submissions.order(created_at: :desc)
-    render 'submissions/index'
+    render 'index.json'
   end
 
   # POST /submissions/:id/favorite

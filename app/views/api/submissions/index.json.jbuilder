@@ -23,4 +23,4 @@ json.meta do
   json.next_page @submissions.next_page
   json.total @submissions.total_count
   json.total_pages @submissions.total_pages
-end if @submissions.total_pages.present?
+end if @submissions.respond_to?(:total_pages)

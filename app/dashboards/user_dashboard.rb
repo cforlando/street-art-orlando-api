@@ -14,8 +14,7 @@ class UserDashboard < Administrate::BaseDashboard
     email: Field::String,
     password: Field::String,
     password_confirmation: Field::String,
-    anonymous: Field::Boolean,
-    preferred: Field::Boolean,
+    vip: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -37,8 +36,7 @@ class UserDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :email,
-    :preferred,
-    :anonymous,
+    :vip,
     :created_at,
     :updated_at,
   ].freeze
@@ -51,8 +49,7 @@ class UserDashboard < Administrate::BaseDashboard
     :email,
     :password,
     :password_confirmation,
-    :preferred,
-    :anonymous
+    :vip
   ].freeze
 
   # Overwrite this method to customize how users are displayed

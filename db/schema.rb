@@ -23,21 +23,22 @@ ActiveRecord::Schema.define(version: 20180414095142) do
 
   create_table "submissions", force: :cascade do |t|
     t.string "title"
+    t.string "artist"
     t.text "description"
     t.string "photo"
-    t.string "status", default: "pending"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "status", default: "processing"
     t.decimal "latitude", precision: 10, scale: 6
     t.decimal "longitude", precision: 10, scale: 6
-    t.string "artist"
+    t.text "location_note"
     t.string "ip_address"
     t.string "app_version"
     t.string "device_model"
     t.string "system_version"
     t.string "device_locale"
-    t.text "location_note"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist"], name: "index_submissions_on_artist"
     t.index ["status"], name: "index_submissions_on_status"
     t.index ["user_id"], name: "index_submissions_on_user_id"
   end
@@ -46,11 +47,9 @@ ActiveRecord::Schema.define(version: 20180414095142) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.boolean "anonymous", default: true
+    t.boolean "vip", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "preferred", default: false
-    t.index ["email"], name: "index_users_on_email"
   end
 
 end

@@ -6,7 +6,6 @@ class Api::UsersController < Api::BaseController
     user.email = params[:email]
     user.password = params[:password]
     user.password_confirmation = params[:password]
-    user.anonymous = params[:anonymous] == '1'
 
     if user.save
       render json: { success: true }, status: :created

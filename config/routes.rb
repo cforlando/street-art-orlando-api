@@ -13,8 +13,9 @@ Rails.application.routes.draw do
     post 'authenticate', to: 'authentication#authenticate'
 
     post 'password/forgot', to: 'password#forgot'
+    post 'password/validate_token', to: 'password#validate_token'
     post 'password/reset', to: 'password#reset'
-    post 'password/update', to: 'password#update'
+    put 'password/update', to: 'password#update'
 
     resources :submissions, only: [:index, :create]
     get 'submissions/mine', to: 'submissions#mine'

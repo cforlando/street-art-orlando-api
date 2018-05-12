@@ -7,7 +7,7 @@ class Api::AuthenticationController < Api::BaseController
     if command.success?
       render json: { auth_token: command.result }
     else
-      render json: { error: command.errors }, status: :unauthorized
+      render json: { error: command.errors[:authentication].first }, status: :unauthorized
     end
   end
   

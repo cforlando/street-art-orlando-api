@@ -16,10 +16,26 @@ class Api::PasswordController < Api::BaseController
     end
   end
 
+  def validate_token
+    errors = []
+    errors << 'Email required' if params[:email].blank?
+    errors << 'Security code required' if params[:token].blank?
+
+    return render json: { errors: errors }, status: :unprocessable_entity if errors.present?
+
+    user = User.where(email: params[:email], reset_password_token: params[:token]).first
+
+    if user.present? && user.password_token_valid?
+      render json: { success: true }
+    else
+      render json: { error: 'Security code not valid or expired. Try generating a new security code.' }, status: :not_found
+    end
+  end
+
   def reset
     errors = []
-    errors << 'Email address not present' if params[:email].blank?
-    errors << 'Token not present' if params[:token].blank?
+    errors << 'Email required' if params[:email].blank?
+    errors << 'Security code required' if params[:token].blank?
 
     return render json: { errors: errors }, status: :unprocessable_entity if errors.present?
 
@@ -32,7 +48,7 @@ class Api::PasswordController < Api::BaseController
         render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
       end
     else
-      render json: { error: 'Link not valid or expired. Try generating a new link.' }, status: :not_found
+      render json: { error: 'Token not valid or expired. Try generating a new token.' }, status: :not_found
     end
   end
 

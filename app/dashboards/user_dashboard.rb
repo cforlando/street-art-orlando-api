@@ -13,7 +13,6 @@ class UserDashboard < Administrate::BaseDashboard
     name: Field::String,
     email: Field::String,
     password: Field::String,
-    password_confirmation: Field::String,
     vip: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -48,7 +47,6 @@ class UserDashboard < Administrate::BaseDashboard
     :name,
     :email,
     :password,
-    :password_confirmation,
     :vip
   ].freeze
 

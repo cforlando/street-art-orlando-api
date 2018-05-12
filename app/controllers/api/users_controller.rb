@@ -3,9 +3,9 @@ class Api::UsersController < Api::BaseController
 
   def register
     user = User.new
+    user.name = params[:name]
     user.email = params[:email]
     user.password = params[:password]
-    user.password_confirmation = params[:password]
 
     if user.save
       render json: { success: true }, status: :created

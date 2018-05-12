@@ -48,12 +48,12 @@ class Api::PasswordController < Api::BaseController
         render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
       end
     else
-      render json: { error: 'Token not valid or expired. Try generating a new token.' }, status: :not_found
+      render json: { error: 'Security code not valid or expired. Try generating a new security code.' }, status: :not_found
     end
   end
 
   def update
-    return render json: { error: 'Password not present' }, status: :unprocessable_entity if params[:password].blank?
+    return render json: { error: 'Password required' }, status: :unprocessable_entity if params[:password].blank?
 
     if current_user.reset_password!(params[:password])
       render json: { success: true }, status: :ok

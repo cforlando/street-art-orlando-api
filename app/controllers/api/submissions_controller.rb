@@ -18,7 +18,7 @@ class Api::SubmissionsController < Api::BaseController
   # POST /submissions
   def create
     if params[:photo].blank?
-      render json: { error: 'missing photo' }, status: :unprocessable_entity
+      render json: { error: 'Photo required' }, status: :unprocessable_entity
       return
     end
 
@@ -35,7 +35,7 @@ class Api::SubmissionsController < Api::BaseController
       SubmissionWorker.perform_async(submission.id, params[:photo])
       render json: { success: true }, status: :accepted
     else
-      render json: submission.errors, status: :unprocessable_entity
+      render json: { errors: submission.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

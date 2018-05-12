@@ -1,5 +1,6 @@
 class Api::SubmissionsController < Api::BaseController
   skip_before_action :authenticate_request, only: [:index]
+  before_action :set_current_user, only: [:index]
 
   PROCESSING = 'processing'
 
@@ -41,12 +42,14 @@ class Api::SubmissionsController < Api::BaseController
 
   # GET submissions/mine
   def mine
+    @user = current_user
     @submissions = current_user.submissions.order(created_at: :desc)
     render 'index.json'
   end
 
   # GET submissions/favorites
   def favorites
+    @user = current_user
     @submissions = current_user.favorite_submissions.order(created_at: :desc)
     render 'index.json'
   end

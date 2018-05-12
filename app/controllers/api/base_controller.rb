@@ -11,4 +11,8 @@ class Api::BaseController < ActionController::API
     render json: { error: 'Unauthorized user' }, status: :unauthorized unless @current_user
   end
 
+  def set_current_user
+    @current_user = AuthorizeApiRequest.call(request.headers).result
+  end
+
 end

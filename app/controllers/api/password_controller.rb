@@ -10,7 +10,7 @@ class Api::PasswordController < Api::BaseController
       user.generate_password_token!
       UsersMailer.password_reset_email(user.id).deliver_later
       
-      render json: { success: true }, status: :ok
+      render json: { success: true, message: "A security code will be sent to you via email shortly." }, status: :ok
     else
       render json: { error: 'Email address not found. Please check and try again' }, status: :not_found
     end

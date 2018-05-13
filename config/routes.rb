@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    post 'register', to: 'users#register'
     post 'authenticate', to: 'authentication#authenticate'
+
+    post 'users/register', to: 'users#register'
 
     post 'password/forgot', to: 'password#forgot'
     post 'password/validate_token', to: 'password#validate_token'

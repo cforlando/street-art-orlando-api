@@ -32,13 +32,25 @@ class User < ApplicationRecord
   end
 
   def generate_password_token!
-    self.reset_password_token = generate_token
-    self.reset_password_token_sent_at = Time.now.utc
-    save!
+    if update_reset_password_token?
+      self.reset_password_token = generate_token
+      self.reset_password_token_sent_at = Time.now.utc
+      save!
+    end
+  end
+
+  def update_reset_password_token?
+    if self.reset_password_token_sent_at.present?
+      return (self.reset_password_token_sent_at + 5.hours) > Time.now.utc
+    end
+    false
   end
 
   def password_token_valid?
-    (self.reset_password_token_sent_at + 4.hours) > Time.now.utc
+    if self.reset_password_token_sent_at.present?
+      return (self.reset_password_token_sent_at + 6.hours) > Time.now.utc
+    end
+    false
   end
 
   def reset_password!(password)

@@ -38,8 +38,6 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.5.2)
-      public_suffix (>= 2.0.2, < 4.0)
     administrate (0.10.0)
       actionpack (>= 4.2, < 6.0)
       actionview (>= 4.2, < 6.0)
@@ -65,7 +63,6 @@ GEM
     carrierwave-base64 (2.7.0)
       carrierwave (>= 0.8.0)
       mime-types (~> 3.0)
-    clipboard (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -75,30 +72,16 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.2)
-    cookiejar (0.3.3)
     crass (1.0.4)
-    daemons (1.2.6)
     datetime_picker_rails (0.0.7)
       momentjs-rails (>= 2.8.1)
     dotenv (2.4.0)
     dotenv-rails (2.4.0)
       dotenv (= 2.4.0)
       railties (>= 3.2, < 6.0)
-    em-http-request (1.1.5)
-      addressable (>= 2.3.4)
-      cookiejar (!= 0.3.1)
-      em-socksify (>= 0.3)
-      eventmachine (>= 1.0.3)
-      http_parser.rb (>= 0.6.0)
-    em-socksify (0.3.2)
-      eventmachine (>= 1.0.0.beta.4)
     erubi (1.7.1)
-    eventmachine (1.2.7)
     excon (0.62.0)
     execjs (2.7.0)
-    faye-websocket (0.10.7)
-      eventmachine (>= 0.12.0)
-      websocket-driver (>= 0.5.1)
     ffi (1.9.23)
     fog-aws (3.0.0)
       fog-core (~> 2.1)
@@ -117,19 +100,8 @@ GEM
       fog-core
       nokogiri (>= 1.5.11, < 2.0.0)
     formatador (0.2.5)
-    forward (1.1.7)
-      clipboard (~> 1.1.1)
-      em-http-request (~> 1.1.5)
-      eventmachine (~> 1.2.1)
-      faye-websocket (~> 0.10.5)
-      highline (~> 1.7.8)
-      json (~> 2.0.2)
-      slop (~> 3.6)
-      thin (~> 1.7.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    highline (1.7.10)
-    http_parser.rb (0.6.0)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
     ipaddress (0.8.3)
@@ -140,7 +112,6 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    json (2.0.4)
     jwt (2.1.0)
     kaminari (1.1.1)
       activesupport (>= 4.1.0)
@@ -178,7 +149,6 @@ GEM
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     pg (1.0.0)
-    public_suffix (3.0.2)
     puma (3.11.4)
     rack (2.0.5)
     rack-cors (1.0.2)
@@ -233,7 +203,6 @@ GEM
       rack-protection (>= 1.5.0)
       redis (>= 3.3.5, < 5)
     simple_command (0.0.9)
-    slop (3.6.0)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -246,11 +215,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.3.13)
-    thin (1.7.2)
-      daemons (~> 1.0, >= 1.0.9)
-      eventmachine (~> 1.0, >= 1.0.4)
-      rack (>= 1, < 3)
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
@@ -282,7 +246,6 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   dotenv-rails
   fog-aws
-  forward
   jbuilder (~> 2.5)
   jwt
   kaminari
@@ -297,14 +260,13 @@ DEPENDENCIES
   simple_command
   spring
   spring-watcher-listen (~> 2.0.0)
-  sqlite3
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
 
 RUBY VERSION
-   ruby 2.4.3p205
+   ruby 2.4.4p296
 
 BUNDLED WITH
-   1.16.1
+   1.16.2

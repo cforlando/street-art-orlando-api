@@ -12,9 +12,12 @@
 
 ActiveRecord::Schema.define(version: 20180414095142) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "favorites", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "submission_id"
+    t.bigint "user_id"
+    t.bigint "submission_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["submission_id"], name: "index_favorites_on_submission_id"
@@ -35,7 +38,7 @@ ActiveRecord::Schema.define(version: 20180414095142) do
     t.string "device_model"
     t.string "system_version"
     t.string "device_locale"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artist"], name: "index_submissions_on_artist"

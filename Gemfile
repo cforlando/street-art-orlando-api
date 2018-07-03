@@ -44,6 +44,7 @@ gem 'administrate'
 
 # Databases
 gem 'pg'
+gem 'aws-healthcheck'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

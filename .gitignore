@@ -23,6 +23,7 @@
 .byebug_history
 
 /public/uploads
+/public/assets/*
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

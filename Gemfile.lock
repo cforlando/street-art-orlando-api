@@ -52,6 +52,8 @@ GEM
     arel (8.0.0)
     autoprefixer-rails (8.5.1)
       execjs
+    aws-healthcheck (1.0.1)
+      rails (>= 3.0)
     bcrypt (3.1.12)
     bindex (0.5.0)
     builder (3.2.3)
@@ -239,6 +241,7 @@ PLATFORMS
 
 DEPENDENCIES
   administrate
+  aws-healthcheck
   bcrypt (~> 3.1.7)
   byebug
   carrierwave (~> 1.0)

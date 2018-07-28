@@ -40,11 +40,11 @@ gem 'fog-aws'
 gem 'kaminari'
 gem 'mini_magick'
 gem 'sidekiq'
+gem 'sentry-raven'
 gem 'administrate'
 
 # Databases
 gem 'pg'
-gem 'aws-healthcheck'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

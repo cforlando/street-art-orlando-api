@@ -12,7 +12,7 @@ class UserDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     email: Field::String,
-    password: Field::String,
+    password: Field::Password,
     vip: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,

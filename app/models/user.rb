@@ -27,10 +27,6 @@ class User < ApplicationRecord
     self.favorites.find_by(submission_id: submission.id).present?
   end
 
-  def formatted_reset_password_token
-    self.reset_password_token.present? ? self.reset_password_token.scan(/.{1,3}/).join(' ') : nil
-  end
-
   def generate_password_token!
     if should_update_password_token?
       self.reset_password_token = generate_token

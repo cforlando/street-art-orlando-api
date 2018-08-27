@@ -54,7 +54,6 @@ class SubmissionDashboard < Administrate::BaseDashboard
     :location_note,
     :created_at,
     :updated_at,
-    :ip_address
   ].freeze
 
   # FORM_ATTRIBUTES

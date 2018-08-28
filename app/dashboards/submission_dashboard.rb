@@ -14,8 +14,10 @@ class SubmissionDashboard < Administrate::BaseDashboard
     description: Field::Text,
     photo: PhotoField,
     status: Field::Select.with_options(collection: ['pending', 'approved', 'rejected']),
+    rejected_reason: Field::String.with_options(searchable: false),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    status_email_sent_at: Field::DateTime,
     latitude: Field::String.with_options(searchable: false),
     longitude: Field::String.with_options(searchable: false),
     artist: Field::String,
@@ -46,6 +48,7 @@ class SubmissionDashboard < Administrate::BaseDashboard
     :user,
     :id,
     :status,
+    :rejected_reason,
     :title,
     :artist,
     :description,
@@ -54,6 +57,7 @@ class SubmissionDashboard < Administrate::BaseDashboard
     :location_note,
     :created_at,
     :updated_at,
+    :status_email_sent_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -62,6 +66,7 @@ class SubmissionDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :user,
     :status,
+    :rejected_reason,
     :title,
     :artist,
     :description,

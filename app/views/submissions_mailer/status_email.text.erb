@@ -1,0 +1,16 @@
+Hello <%= @submission.user.name.present? ? @submission.user.first_name : @submission.user.email %>,
+
+Thank you for using Street Art Orlando. We have reviewed your photo submission.
+
+Status: <%= @submission.status.upcase %>
+<% if @submission.status == 'rejected' %>
+Reason: <%= @submission.rejected_reason %>
+<% end %>
+
+<% if @submission.status == 'approved' %>
+Your photo is now visible within the Street Art Orlando App.
+<% end %>
+
+Thank you,
+
+The Street Art Orlando Team

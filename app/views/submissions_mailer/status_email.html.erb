@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hello <%= @submission.user.name.present? ? @submission.user.first_name : @submission.user.email %>,</p>
+    <p>
+      Thank you for using Street Art Orlando. We have reviewed your photo submission.
+    </p>
+    <p>
+      Status: <%= @submission.status.upcase %>
+      <% if @submission.status == 'rejected' %>
+      <br/>
+      Reason: <%= @submission.rejected_reason %></p>
+      <% end %>
+    </p>
+
+    <% if @submission.status == 'approved' %>
+    <p>
+      Your photo is now visible within the Street Art Orlando App.
+    </p>
+    <% end %>
+
+    <p>
+      Thank you,<br/><br/>
+
+      The Street Art Orlando Team
+    </p>
+  </body>
+</html>

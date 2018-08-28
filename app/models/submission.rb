@@ -6,9 +6,14 @@ class Submission < ApplicationRecord
 
   mount_base64_uploader :photo, PhotoUploader
 
+  after_create_commit :send_welcome_email
+  after_update_commit :send_status_email
+
   validates :user, presence: true
   validates :latitude, presence: true
   validates :longitude, presence: true
+
+  validates :rejected_reason, presence: true, if: :first_rejected?
 
   scope :pending, -> { where(status: 'pending').order(created_at: :desc) }
   scope :approved, -> { where(status: 'approved').order(created_at: :desc) }
@@ -28,6 +33,23 @@ class Submission < ApplicationRecord
 
   def tiny_url
     photo.tiny.url
+  end
+
+  protected
+
+  def first_rejected?
+    self.status_email_sent_at.blank? && status == 'rejected'
+  end
+
+  def send_welcome_email
+    SubmissionsMailer.admin_report_email(id).deliver_later
+    SubmissionsMailer.pending_email(id).deliver_later
+  end
+
+  def send_status_email
+    if ['rejected', 'approved'].include?(status) && status_email_sent_at.blank?
+      SubmissionsMailer.status_email(id).deliver_later
+    end
   end
   
 end

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hello <%= @submission.user.name.present? ? @submission.user.first_name : @submission.user.email %>,</p>
+    <p>
+      Thank you for using Street Art Orlando. We have received your photo and is pending approval
+      by one of our moderators. We will notify you once the photo has been reviewed.
+    </p>
+    <p>
+      Thank you,<br/><br/>
+
+      The Street Art Orlando Team
+    </p>
+  </body>
+</html>

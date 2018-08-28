@@ -7,12 +7,6 @@ class AddRejectionReasonToSubmissions < ActiveRecord::Migration[5.1]
   def up
     add_column :submissions, :rejected_reason, :string
     add_column :submissions, :status_email_sent_at, :datetime
-
-    Submission.where(status: 'rejected').each do |submission|
-      submission.rejected_reason = submission.status
-      submission.status_email_sent_at = DateTime.now
-      submission.save!
-    end
   end
 
   def down

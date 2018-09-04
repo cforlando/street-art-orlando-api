@@ -9,13 +9,21 @@ class SubmissionsMailer < ApplicationMailer
   def pending_email(submission_id)
     @submission = Submission.find(submission_id)
 
-    mail(to: @submission.user.email, subject: 'Street Art Orlando Submission')
+    mail(
+      from: 'Street Art Orlando Moderator <moderator@streetartorlando.com>',
+      to: @submission.user.email,
+      subject: 'Street Art Orlando Submission'
+    )
   end
 
   def status_email(submission_id)
     @submission = Submission.find(submission_id)
 
-    mail(to: @submission.user.email, subject: 'Street Art Orlando Submission Update')
+    mail(
+      from: 'Street Art Orlando Moderator <moderator@streetartorlando.com>',
+      to: @submission.user.email,
+      subject: 'Street Art Orlando Submission Update'
+    )
     
     @submission.status_email_sent_at = DateTime.now
     @submission.save!

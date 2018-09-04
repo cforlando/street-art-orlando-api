@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'noreply@streetartorlando.com'
+  default from: 'Street Art Orlando <noreply@streetartorlando.com>'
   layout 'mailer'
 end

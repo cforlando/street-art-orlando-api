@@ -5,7 +5,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   # storage :file
-  storage :fog
+  storage :aws
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -28,12 +28,16 @@ class PhotoUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
+  version :display do
+    process resize_to_fit: [2048, 2048]
+  end
+
   # Create different versions of your uploaded files:
-  version :thumb do
+  version :thumb, from_version: :display do
     process resize_to_fit: [640, 640]
   end
 
-  version :tiny do
+  version :tiny, from_version: :thumb do
     process resize_to_fit: [150, 150]
   end
 
@@ -41,6 +45,10 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # For images you might use something like this:
   def extension_whitelist
     %w(jpg jpeg png)
+  end
+
+  def content_type_blacklist
+    ['application/text', 'application/json']
   end
 
   # Override the filename of the uploaded files:

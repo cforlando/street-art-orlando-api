@@ -24,7 +24,7 @@ class Submission < ApplicationRecord
   end
 
   def photo_url
-    photo.url
+    photo.display.url
   end
 
   def thumb_url

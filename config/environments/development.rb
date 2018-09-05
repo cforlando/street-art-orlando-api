@@ -61,4 +61,6 @@ Rails.application.configure do
   config.logger = ActiveSupport::TaggedLogging.new(logger)
 
   config.web_console.whiny_requests = false
+
+  config.sass.inline_source_maps = true
 end

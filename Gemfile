@@ -11,7 +11,7 @@ gem 'rails', '~> 5.1.5'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sassc-rails', '~> 1.3.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -36,7 +36,7 @@ gem 'jwt'
 gem 'simple_command'
 gem 'carrierwave', '~> 1.0'
 gem 'carrierwave-base64'
-gem 'fog-aws'
+gem 'carrierwave-aws'
 gem 'kaminari'
 gem 'mini_magick'
 gem 'sidekiq'
@@ -64,4 +64,4 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-ruby '2.4.4'
+ruby '2.5.1'

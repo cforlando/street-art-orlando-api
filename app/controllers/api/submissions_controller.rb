@@ -43,7 +43,7 @@ class Api::SubmissionsController < Api::BaseController
   # GET submissions/mine
   def mine
     @user = current_user
-    @submissions = current_user.submissions.order(created_at: :desc)
+    @submissions = current_user.submissions.order(created_at: :desc).limit(50)
     render 'index.json'
   end
 

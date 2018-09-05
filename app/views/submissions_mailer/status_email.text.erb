@@ -5,6 +5,8 @@ Thank you for using Street Art Orlando. We have reviewed your photo submission.
 Status: <%= @submission.status.upcase %>
 <% if @submission.status == 'rejected' %>
 Reason: <%= @submission.rejected_reason %>
+
+If you feel this was a mistake, please reply to this email or contact a moderator at moderator@streetartorlando.com to resubmit your photo for review.
 <% end %>
 
 <% if @submission.status == 'approved' %>

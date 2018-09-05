@@ -12,7 +12,13 @@ class SubmissionDashboard < Administrate::BaseDashboard
     id: Field::Number,
     title: Field::String,
     description: Field::Text,
-    photo: PhotoField,
+    photo: Field::Carrierwave.with_options(
+      image: :thumb,
+      multiple: false,
+      image_on_index: true,
+      remove: false,
+      remote_url: false
+    ),
     status: Field::Select.with_options(collection: ['pending', 'approved', 'rejected']),
     rejected_reason: Field::String.with_options(searchable: false),
     created_at: Field::DateTime,
@@ -27,7 +33,7 @@ class SubmissionDashboard < Administrate::BaseDashboard
     system_version: Field::String,
     device_locale: Field::String,
     location_note: Field::Text,
-    coordinate: MapField
+    coordinate: MapField,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -67,6 +73,7 @@ class SubmissionDashboard < Administrate::BaseDashboard
     :user,
     :status,
     :rejected_reason,
+    :photo,
     :title,
     :artist,
     :description,

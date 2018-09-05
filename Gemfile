@@ -42,6 +42,7 @@ gem 'mini_magick'
 gem 'sidekiq'
 gem 'sentry-raven'
 gem 'administrate'
+gem 'administrate-field-carrierwave', '~> 0.3.2'
 
 # Databases
 gem 'pg'

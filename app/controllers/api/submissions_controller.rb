@@ -5,7 +5,7 @@ class Api::SubmissionsController < Api::BaseController
   PROCESSING = 'processing'
 
   DEFAULT_PAGE = 1
-  DEFAULT_PER_PAGE = 10
+  DEFAULT_PER_PAGE = 25
 
   # GET /submissions
   def index

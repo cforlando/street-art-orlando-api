@@ -44,6 +44,7 @@ class Submission < ApplicationRecord
   def send_welcome_email
     SubmissionsMailer.admin_report_email(id).deliver_later
     SubmissionsMailer.pending_email(id).deliver_later
+    send_status_email
   end
 
   def send_status_email

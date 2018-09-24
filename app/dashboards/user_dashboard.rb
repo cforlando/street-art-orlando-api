@@ -10,12 +10,14 @@ class UserDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     submissions: Field::HasMany,
     id: Field::Number,
+    username: Field::String,
     name: Field::String,
     email: Field::String,
     password: Field::Password,
     vip: Field::Boolean,
+    disabled: Field::Boolean,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -26,7 +28,10 @@ class UserDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :name,
-    :email
+    :username,
+    :email,
+    :vip,
+    :disabled
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -34,8 +39,10 @@ class UserDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :id,
     :name,
+    :username,
     :email,
     :vip,
+    :disabled,
     :created_at,
     :updated_at,
   ].freeze
@@ -45,15 +52,17 @@ class UserDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :name,
+    :username,
     :email,
     :password,
-    :vip
+    :vip,
+    :disabled
   ].freeze
 
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
   #
   def display_resource(user)
-    "User ##{user.id} [#{user.email}]"
+    "User ##{user.id} [#{user.username}]"
   end
 end

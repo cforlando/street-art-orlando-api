@@ -4,7 +4,7 @@ class Api::PasswordController < Api::BaseController
   def forgot
     return render json: { error: 'Email not present' } if params[:email].blank?
 
-    user = User.find_by(email: params[:email])
+    user = User.find_by(email: params[:email], disabled: false)
 
     if user.present?
       user.generate_password_token!
@@ -23,7 +23,7 @@ class Api::PasswordController < Api::BaseController
 
     return render json: { errors: errors }, status: :unprocessable_entity if errors.present?
 
-    user = User.where(email: params[:email], reset_password_token: params[:token]).first
+    user = User.where(email: params[:email], reset_password_token: params[:token], disabled: false).first
 
     if user.present? && user.password_token_valid?
       render json: { success: true }
@@ -39,7 +39,7 @@ class Api::PasswordController < Api::BaseController
 
     return render json: { errors: errors }, status: :unprocessable_entity if errors.present?
 
-    user = User.where(email: params[:email], reset_password_token: params[:token]).first
+    user = User.where(email: params[:email], reset_password_token: params[:token], disabled: false).first
 
     if user.present? && user.password_token_valid?
       if user.reset_password!(params[:password])

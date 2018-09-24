@@ -19,7 +19,7 @@ class SubmissionDashboard < Administrate::BaseDashboard
       remove: false,
       remote_url: false
     ),
-    status: Field::Select.with_options(collection: ['pending', 'approved', 'rejected']),
+    status: Field::Select.with_options(collection: ['pending', 'approved', 'processing', 'rejected']),
     rejected_reason: Field::String.with_options(searchable: false),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,

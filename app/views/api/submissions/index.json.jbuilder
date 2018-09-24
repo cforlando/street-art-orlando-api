@@ -12,8 +12,12 @@ json.submissions @submissions do |submission|
     :location_note,
     :created_at
   )
+  
+  if @user.present?
+    json.favorite @user.favorite?(submission)
+    json.username @user.username
+  end
 
-  json.favorite @user.present? ? @user.favorite?(submission) : false
   json.latitude submission.latitude.to_f
   json.longitude submission.longitude.to_f
 end

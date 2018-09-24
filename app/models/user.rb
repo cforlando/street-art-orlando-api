@@ -7,8 +7,14 @@ class User < ApplicationRecord
 
   validates :email, presence: true
   validates :email, uniqueness: true
+  validates :username, presence: true
+  validates :username, uniqueness: true
 
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+
+  def active?
+    self.disabled.present? && !self.disabled
+  end
 
   def first_name
     self.name.present? ? self.name.split(' ').first : nil

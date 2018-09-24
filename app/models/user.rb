@@ -9,8 +9,8 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
 
-  # validates :nickname, presence: true
-  # validates :nickname, uniqueness: true
+  validates :nickname, presence: true
+  validates :nickname, uniqueness: true
 
   def active?
     self.disabled.present? && !self.disabled

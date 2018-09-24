@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20180924034952) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "disabled", default: false
-    t.string "username"
+    t.string "nickname"
   end
 
 end

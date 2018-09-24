@@ -10,9 +10,9 @@ class UserDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     submissions: Field::HasMany,
     id: Field::Number,
-    username: Field::String,
+    nickname: Field::String,
     name: Field::String,
-    email: Field::String,
+    email: Field::Email,
     password: Field::Password,
     vip: Field::Boolean,
     disabled: Field::Boolean,
@@ -28,7 +28,7 @@ class UserDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :name,
-    :username,
+    :nickname,
     :email,
     :vip,
     :disabled
@@ -39,7 +39,7 @@ class UserDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :id,
     :name,
-    :username,
+    :nickname,
     :email,
     :vip,
     :disabled,
@@ -52,7 +52,7 @@ class UserDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :name,
-    :username,
+    :nickname,
     :email,
     :password,
     :vip,
@@ -63,6 +63,6 @@ class UserDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(user)
-    "User ##{user.id} [#{user.username}]"
+    "User ##{user.id} [#{user.nickname}]"
   end
 end

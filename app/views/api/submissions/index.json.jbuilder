@@ -15,7 +15,7 @@ json.submissions @submissions do |submission|
   
   if @user.present?
     json.favorite @user.favorite?(submission)
-    json.username @user.username
+    json.nickname @user.nickname
   end
 
   json.latitude submission.latitude.to_f

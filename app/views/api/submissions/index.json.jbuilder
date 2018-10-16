@@ -12,10 +12,11 @@ json.submissions @submissions do |submission|
     :location_note,
     :created_at
   )
+
+  json.nickname submission.user.nickname
   
   if @user.present?
     json.favorite @user.favorite?(submission)
-    json.nickname @user.nickname
   end
 
   json.latitude submission.latitude.to_f

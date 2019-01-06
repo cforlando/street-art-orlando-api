@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :submissions
     resources :users
+    resources :reports
 
     root to: "submissions#index"
   end
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
     post 'authenticate', to: 'authentication#authenticate'
 
     post 'users/register', to: 'users#register'
+    get 'users/me', to: 'users#show'
 
     post 'password/forgot', to: 'password#forgot'
     post 'password/validate_token', to: 'password#validate_token'
@@ -23,6 +25,8 @@ Rails.application.routes.draw do
     get 'submissions/favorites', to: 'submissions#favorites'
     post 'submissions/:id/favorite', to: 'submissions#favorite'
     delete 'submissions/:id/unfavorite', to: 'submissions#unfavorite'
+
+    resources :reports, only: [:create]
   end
 
   Sidekiq::Web.use Rack::Auth::Basic do |username, password|

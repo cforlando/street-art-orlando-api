@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180828010141) do
+ActiveRecord::Schema.define(version: 20190106021753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,14 +24,29 @@ ActiveRecord::Schema.define(version: 20180828010141) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
+  create_table "reports", force: :cascade do |t|
+    t.bigint "submission_id"
+    t.bigint "user_id"
+    t.string "status", default: "pending"
+    t.text "moderation_note"
+    t.string "ip_address"
+    t.string "device_identifier"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["device_identifier"], name: "index_reports_on_device_identifier"
+    t.index ["status"], name: "index_reports_on_status"
+    t.index ["submission_id"], name: "index_reports_on_submission_id"
+    t.index ["user_id"], name: "index_reports_on_user_id"
+  end
+
   create_table "submissions", force: :cascade do |t|
     t.string "title"
     t.string "artist"
     t.text "description"
     t.string "photo"
     t.string "status", default: "processing"
-    t.decimal "latitude", precision: 10, scale: 6
-    t.decimal "longitude", precision: 10, scale: 6
+    t.decimal "latitude", precision: 15, scale: 10
+    t.decimal "longitude", precision: 15, scale: 10
     t.text "location_note"
     t.string "ip_address"
     t.string "app_version"
@@ -57,6 +72,8 @@ ActiveRecord::Schema.define(version: 20180828010141) do
     t.boolean "vip", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "disabled", default: false
+    t.string "nickname"
   end
 
 end

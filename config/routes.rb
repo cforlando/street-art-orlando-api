@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     delete 'submissions/:id/unfavorite', to: 'submissions#unfavorite'
 
     resources :reports, only: [:create]
+    get 'reports/codes', to: 'reports#codes'
   end
 
   Sidekiq::Web.use Rack::Auth::Basic do |username, password|

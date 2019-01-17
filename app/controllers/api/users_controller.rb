@@ -4,6 +4,7 @@ class Api::UsersController < Api::BaseController
   def register
     user = User.new
     user.name = params[:name]
+    user.nickname = params[:nickname]
     user.email = params[:email]
     user.password = params[:password]
 

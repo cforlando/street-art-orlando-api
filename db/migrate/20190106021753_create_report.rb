@@ -5,6 +5,7 @@ class CreateReport < ActiveRecord::Migration[5.1]
       t.references :user, index: true
 
       t.string :status, default: 'pending', index: true
+      t.text :reason
       t.text :moderation_note
 
       # Device

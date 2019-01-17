@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20190106021753) do
     t.bigint "submission_id"
     t.bigint "user_id"
     t.string "status", default: "pending"
+    t.text "reason"
     t.text "moderation_note"
     t.string "ip_address"
     t.string "device_identifier"

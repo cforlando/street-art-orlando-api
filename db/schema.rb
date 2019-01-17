@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180924034952) do
+
+ActiveRecord::Schema.define(version: 20190106021753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +23,22 @@ ActiveRecord::Schema.define(version: 20180924034952) do
     t.datetime "updated_at", null: false
     t.index ["submission_id"], name: "index_favorites_on_submission_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.bigint "submission_id"
+    t.bigint "user_id"
+    t.string "status", default: "pending"
+    t.text "reason"
+    t.text "moderation_note"
+    t.string "ip_address"
+    t.string "device_identifier"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["device_identifier"], name: "index_reports_on_device_identifier"
+    t.index ["status"], name: "index_reports_on_status"
+    t.index ["submission_id"], name: "index_reports_on_submission_id"
+    t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
   create_table "submissions", force: :cascade do |t|

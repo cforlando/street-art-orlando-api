@@ -15,4 +15,8 @@ class Api::BaseController < ActionController::API
     @current_user = AuthorizeApiRequest.call(request.headers).result
   end
 
+  def device_identifier
+    request.headers['DEVICE-IDENTIFIER']
+  end
+
 end

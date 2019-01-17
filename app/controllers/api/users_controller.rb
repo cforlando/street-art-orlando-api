@@ -1,10 +1,11 @@
 class Api::UsersController < Api::BaseController
-  skip_before_action :authenticate_request
+  skip_before_action :authenticate_request, only: [:register]
 
   def register
     user = User.new
     user.nickname = params[:nickname]
     user.name = params[:name]
+    user.nickname = params[:nickname]
     user.email = params[:email]
     user.password = params[:password]
 
@@ -13,6 +14,10 @@ class Api::UsersController < Api::BaseController
     else
       render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
     end
+  end
+
+  def show
+    @user = current_user
   end
 
 end

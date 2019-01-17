@@ -3,8 +3,10 @@ module Admin
     before_action :default_params
 
     def default_params
-      params[:order] ||= 'created_at'
-      params[:direction] ||= 'desc'
+      resource_params = params.fetch(resource_name, {})
+      order = resource_params.fetch(:order, "created_at")
+      direction = resource_params.fetch(:direction, "desc")
+      params[resource_name] = resource_params.merge(order: order, direction: direction)
     end
 
     # To customize the behavior of this controller,

@@ -1,5 +1,5 @@
 module Admin
-  class UsersController < Admin::ApplicationController
+  class ReportsController < Admin::ApplicationController
     before_action :default_params
 
     def default_params
@@ -14,17 +14,21 @@ module Admin
     #
     # def index
     #   super
-    #   @resources = User.
+    #   @resources = Report.
     #     page(params[:page]).
     #     per(10)
     # end
 
     # Define a custom finder by overriding the `find_resource` method:
     # def find_resource(param)
-    #   User.find_by!(slug: param)
+    #   Report.find_by!(slug: param)
     # end
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
     # for more information
+
+    def valid_action?(name, resource = resource_class)
+      %w[destroy].exclude?(name.to_s) && super
+    end
   end
 end

@@ -11,6 +11,7 @@ class UserDashboard < Administrate::BaseDashboard
     submissions: Field::HasMany,
     id: Field::Number,
     name: Field::String,
+    nickname: Field::String,
     email: Field::String,
     password: Field::Password,
     vip: Field::Boolean,
@@ -25,7 +26,7 @@ class UserDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :id,
-    :name,
+    :nickname,
     :email
   ].freeze
 
@@ -33,6 +34,7 @@ class UserDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :id,
+    :nickname,
     :name,
     :email,
     :vip,
@@ -44,6 +46,7 @@ class UserDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
+    :nickname,
     :name,
     :email,
     :password,
